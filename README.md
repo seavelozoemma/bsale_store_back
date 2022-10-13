@@ -9,21 +9,67 @@ Haciendo uso del API Criteria que se encuentra en el core de JPA.
 
 La conexión esta informada en el archivo .properties de la aplicación
 
-## Servicios
+# Rest API
 
 Cuenta con 2 servicios (ambos son solo metodos de lectura (GET)):
 
-/category
-Este servicio nos permitira consultar las categorias disponibles
+## Obtener listado de categorias
 
-/product?name=${String}&category=${Long}&order=${Long} Este servicio 
-nos permitira consultar los productos mediante un filtro en la cual:
-#####name: 
-Nos permitira filtrar por los nombres de producto
-#####category:
-Nos permitira filtrar por ID de categoria de producto
-#####order:
-Nos permitira de manera internar obedecer según lógica de frontend a un ordenamiento:
+### Request
+`GET /category/`
+        
+    curl --location --request GET 'const API_URL = 'https://bsale-store-back.herokuapp.com/category/'
+
+
+### Response 
+    HTTP/1.1 200 Ok
+    Date: Thu, 24 Feb 2011 12:36:30 GMT
+    Status: 200 Pl
+    Connection: close
+    Content-Type: application/json
+    Location: /category/
+    Content-Length: 36
+
+    [{
+        "id": 1,
+        "name": "bebida energetica"
+    }]
+
+
+Este servicio nos permitira obtener un listado de categorias.
+
+###Request
+`GET /product/`
+
+    curl --location --request GET 'https://bsale-store-back.herokuapp.com/product/?name=&category=0&order=0'
+
+###Response
+    HTTP/1.1 200 Ok
+    Date: Thu, 24 Feb 2011 12:36:30 GMT
+    Status: 200 Ok
+    Connection: close
+    Content-Type: application/json
+    Location: /product/?name=&category=0&order=0
+    Content-Length: 36
+
+    [{
+        "id": 5,
+        "name": "ENERGETICA MR BIG",
+        "urlImage": "https://dojiw2m9tvv09.cloudfront.net/11132/product/misterbig3308256.jpg",
+        "price": 1490.0,
+        "discount": 20.0,
+        "category": {
+            "id": 1,
+            "name": "bebida energetica"
+        }
+    }]
+Este servicio nos permitira consultar los productos mediante un filtro en la cual:
+
+__name__: Nos permitira filtrar por los nombres de producto 
+
+__category__:Nos permitira filtrar por ID de categoria de producto
+
+__order__: Nos permitira de manera internar obedecer según lógica de frontend a un ordenamiento:
 
 Orden | Descripción                                         
 --- |-----------------------------------------------------
